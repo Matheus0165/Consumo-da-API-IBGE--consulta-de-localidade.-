@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API IBGE — Consulta de Localidades Brasileiras</title>
+
+  <!-- Fontes externas: Plus Jakarta Sans (corpo/títulos), JetBrains Mono (código) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Folha de estilos do projeto -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<main class="container">
+
+  <!-- ===========================================================
+       CABEÇALHO — barra superior simples
+       =========================================================== -->
+  <header class="masthead">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>API Conectada</span>
+    </div>
+    <div class="masthead-url">servicodados.ibge.gov.br</div>
+  </header>
+
+  <!-- ===========================================================
+       HERO — Título do projeto e descrição da API
+       =========================================================== -->
+  <section class="hero">
+    <div>
+      <h1 class="hero-title">
+        Consulta de Localidades<br>
+        <span class="accent">Brasileiras</span>
+      </h1>
+      <p class="hero-lead">
+        Projeto que consulta em tempo real a base de dados oficial do
+        <strong>IBGE</strong> para listar os 26 estados, o Distrito Federal
+        e todos os municípios brasileiros — sem chave, sem autenticação,
+        apenas requisições <strong>HTTP GET</strong> com respostas em
+        <strong>JSON</strong>.
+      </p>
+    </div>
+    <aside class="hero-info">
+      <div class="info-row">
+        <span>Fonte</span>
+        <strong>IBGE — v1</strong>
+      </div>
+      <div class="info-row">
+        <span>Método</span>
+        <strong>HTTP GET</strong>
+      </div>
+      <div class="info-row">
+        <span>Formato</span>
+        <strong>JSON · UTF-8</strong>
+      </div>
+      <div class="info-row">
+        <span>Autenticação</span>
+        <strong>Não requerida</strong>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ===========================================================
+       ANÁLISE DA API — atende aos 10 pontos da apresentação
+       =========================================================== -->
+  <section class="analysis" aria-label="Análise técnica da API">
+    <header class="analysis-head">
+      <h2 class="analysis-title">Análise da API</h2>
+      <p class="analysis-sub">
+        Características técnicas da API de Localidades do IBGE
+      </p>
+    </header>
+
+    <div class="analysis-grid">
+
+      <!-- 01 — PROPÓSITO -->
+      <article class="analysis-cell">
+        <div class="analysis-num">01</div>
+        <h3 class="analysis-label">Propósito</h3>
+        <p class="analysis-body">
+          Disponibilizar dados oficiais sobre a divisão político-administrativa
+          do Brasil — regiões, estados, mesorregiões, microrregiões, municípios,
+          distritos e subdistritos.
+        </p>
+      </article>
+
+      <!-- 02 — BASE URL -->
+      <article class="analysis-cell">
+        <div class="analysis-num">02</div>
+        <h3 class="analysis-label">Base URL</h3>
+        <p class="analysis-body">
+          <code class="inline-code">https://servicodados.ibge.gov.br/api/v1/localidades</code>
+        </p>
+      </article>
+
+      <!-- 03 — ENDPOINTS -->
+      <article class="analysis-cell analysis-cell-wide">
+        <div class="analysis-num">03</div>
+        <h3 class="analysis-label">Principais endpoints</h3>
+        <div class="analysis-body">
+          <ul class="endpoint-list">
+            <li><span class="ep-method">GET</span> <code>/estados</code> — lista todos os estados e o DF</li>
+            <li><span class="ep-method">GET</span> <code>/estados/{UF}</code> — detalhes de um estado pela sigla</li>
+            <li><span class="ep-method">GET</span> <code>/estados/{UF}/municipios</code> — municípios de um estado</li>
+            <li><span class="ep-method">GET</span> <code>/regioes</code> — lista as 5 regiões do Brasil</li>
+            <li><span class="ep-method">GET</span> <code>/municipios</code> — lista todos os municípios brasileiros</li>
+            <li><span class="ep-method">GET</span> <code>/estados/{UF}/distritos</code> — distritos de um estado</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 04 — AUTENTICAÇÃO -->
+      <article class="analysis-cell">
+        <div class="analysis-num">04</div>
+        <h3 class="analysis-label">Possui autenticação?</h3>
+        <p class="analysis-body">
+          <strong>Não.</strong> A API é pública e gratuita, sem necessidade de
+          cadastro ou credenciais para consumo.
+        </p>
+      </article>
+
+      <!-- 05 — TIPO DE AUTENTICAÇÃO -->
+      <article class="analysis-cell">
+        <div class="analysis-num">05</div>
+        <h3 class="analysis-label">Tipo de autenticação</h3>
+        <p class="analysis-body">
+          <strong>Nenhum.</strong> Não exige API Key, Bearer Token, OAuth, Basic Auth
+          ou qualquer outro mecanismo.
+        </p>
+      </article>
+
+      <!-- 06 — ONDE É ENVIADA -->
+      <article class="analysis-cell">
+        <div class="analysis-num">06</div>
+        <h3 class="analysis-label">Onde a credencial é enviada</h3>
+        <p class="analysis-body">
+          <strong>Não se aplica.</strong> Como não há autenticação, nenhum dado é
+          enviado em <em>header</em>, <em>query string</em> ou <em>body</em>.
+        </p>
+      </article>
+
+      <!-- 07 — VERSIONAMENTO -->
+      <article class="analysis-cell">
+        <div class="analysis-num">07</div>
+        <h3 class="analysis-label">Versionamento</h3>
+        <p class="analysis-body">
+          <strong>Sim — via URI (URI Versioning).</strong> A versão é declarada no
+          próprio caminho da URL: <code class="inline-code">/api/v1/</code>.
+          Mudanças incompatíveis criariam um <code class="inline-code">/v2/</code>
+          em paralelo, mantendo a versão anterior funcionando.
+        </p>
+      </article>
+
+      <!-- 08 — HATEOAS -->
+      <article class="analysis-cell">
+        <div class="analysis-num">08</div>
+        <h3 class="analysis-label">Utiliza HATEOAS?</h3>
+        <p class="analysis-body">
+          <strong>Não.</strong> A resposta retorna apenas dados, sem links de
+          hipermídia (<code class="inline-code">_links</code>, <code class="inline-code">href</code>)
+          apontando para recursos relacionados. O cliente precisa montar manualmente
+          a URL para navegar entre os recursos.
+        </p>
+      </article>
+
+      <!-- 09 — TIPO DE RESPOSTA -->
+      <article class="analysis-cell">
+        <div class="analysis-num">09</div>
+        <h3 class="analysis-label">Tipo de resposta</h3>
+        <p class="analysis-body">
+          <strong>JSON</strong> com codificação <strong>UTF-8</strong>.
+          Header retornado:
+          <code class="inline-code">Content-Type: application/json; charset=utf-8</code>.
+        </p>
+      </article>
+
+    </div>
+
+    <!-- 10 — ESTRUTURA DE UM OBJETO RETORNADO -->
+    <div class="json-section">
+      <header class="json-section-head">
+        <div class="analysis-num">10</div>
+        <h3 class="analysis-label">Estrutura de um objeto retornado</h3>
+      </header>
+
+      <div class="json-grid">
+
+        <!-- Exemplo 1: Estado -->
+        <div class="json-card">
+          <div class="json-card-head">
+            <span class="json-method">GET</span>
+            <code class="json-path">/estados/SC</code>
+          </div>
+<pre class="json-body"><code><span class="tk-pun">{</span>
+  <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">42</span><span class="tk-pun">,</span>
+  <span class="tk-key">"sigla"</span><span class="tk-pun">:</span> <span class="tk-str">"SC"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Santa Catarina"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"regiao"</span><span class="tk-pun">:</span> <span class="tk-pun">{</span>
+    <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">4</span><span class="tk-pun">,</span>
+    <span class="tk-key">"sigla"</span><span class="tk-pun">:</span> <span class="tk-str">"S"</span><span class="tk-pun">,</span>
+    <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Sul"</span>
+  <span class="tk-pun">}</span>
+<span class="tk-pun">}</span></code></pre>
+        </div>
+
+        <!-- Exemplo 2: Município -->
+        <div class="json-card">
+          <div class="json-card-head">
+            <span class="json-method">GET</span>
+            <code class="json-path">/estados/SC/municipios</code>
+          </div>
+<pre class="json-body"><code><span class="tk-pun">{</span>
+  <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">4205407</span><span class="tk-pun">,</span>
+  <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Florianópolis"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"microrregiao"</span><span class="tk-pun">:</span> <span class="tk-pun">{</span>
+    <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">42010</span><span class="tk-pun">,</span>
+    <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Florianópolis"</span><span class="tk-pun">,</span>
+    <span class="tk-key">"mesorregiao"</span><span class="tk-pun">:</span> <span class="tk-pun">{</span>
+      <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">4205</span><span class="tk-pun">,</span>
+      <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Grande Florianópolis"</span><span class="tk-pun">,</span>
+      <span class="tk-key">"UF"</span><span class="tk-pun">:</span> <span class="tk-pun">{</span>
+        <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-num">42</span><span class="tk-pun">,</span>
+        <span class="tk-key">"sigla"</span><span class="tk-pun">:</span> <span class="tk-str">"SC"</span><span class="tk-pun">,</span>
+        <span class="tk-key">"nome"</span><span class="tk-pun">:</span> <span class="tk-str">"Santa Catarina"</span>
+      <span class="tk-pun">}</span>
+    <span class="tk-pun">}</span>
+  <span class="tk-pun">}</span>
+<span class="tk-pun">}</span></code></pre>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===========================================================
+       CARTÕES — Etapa 1 (Estados) e Etapa 2 (Municípios)
+       =========================================================== -->
+  <section class="cards">
+
+    <!-- CARTÃO 1: ESTADOS -->
+    <article class="card">
+      <div class="card-marker">Etapa 01</div>
+      <h2 class="card-title">Carregar estados</h2>
+      <p class="card-sub">/estados</p>
+
+      <div class="control-group">
+        <button id="btn-load-estados" class="btn" type="button">
+          <span class="btn-label">Buscar 27 unidades federativas</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+
+        <div class="select-wrap">
+          <select id="select-estado" disabled aria-label="Selecione um estado">
+            <option value="">— Aguardando carregamento —</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="status-estados" class="status">
+        <span class="status-bullet"></span>
+        <span class="status-text">Pronto para iniciar a requisição</span>
+      </div>
+    </article>
+
+    <!-- CARTÃO 2: MUNICÍPIOS -->
+    <article class="card">
+      <div class="card-marker">Etapa 02</div>
+      <h2 class="card-title">Buscar municípios</h2>
+      <p class="card-sub">/estados/{UF}/municipios</p>
+
+      <div class="control-group">
+        <button id="btn-load-municipios" class="btn" type="button" disabled>
+          <span class="btn-label">Selecione um estado primeiro</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div id="status-municipios" class="status">
+        <span class="status-bullet"></span>
+        <span class="status-text">Aguardando seleção de estado</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ===========================================================
+       SEÇÃO DE RESULTADOS — Lista dos municípios retornados
+       =========================================================== -->
+  <section id="results" class="results-section" aria-live="polite">
+    <div class="results-header">
+      <h2 class="results-title" id="results-title">
+        Municípios de <span id="results-uf">—</span>
+      </h2>
+      <span class="results-count">
+        <strong id="results-count-num">0</strong> registros
+      </span>
+    </div>
+
+    <input
+      id="search"
+      type="text"
+      class="results-search"
+      placeholder="Filtrar pelo nome do município..."
+      aria-label="Filtrar municípios"
+    />
+
+    <div id="municipality-grid" class="municipality-grid">
+      <!-- Municípios serão inseridos aqui pelo JavaScript -->
+    </div>
+  </section>
+
+  <!-- ===========================================================
+       RODAPÉ
+       =========================================================== -->
+  <footer>
+    <div>
+      Consumo de API REST
+    </div>
+    <div>
+      Dados <a href="https://servicodados.ibge.gov.br/api/docs/localidades" target="_blank" rel="noopener">© IBGE</a>
+    </div>
+  </footer>
+
+</main>
+
+<!-- Script da aplicação -->
+<script src="script.js"></script>
+</body>
+</html>

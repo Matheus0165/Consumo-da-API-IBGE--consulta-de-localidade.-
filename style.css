@@ -1,0 +1,667 @@
+/* ============================================================
+   VARIÁVEIS GLOBAIS — Paleta neutra e limpa, com acento verde
+   ============================================================ */
+:root {
+  --bg: #f6f7f5;
+  --card: #ffffff;
+  --ink: #18181b;
+  --ink-soft: #52525b;
+  --ink-faint: #a1a1aa;
+  --line: #e4e4e7;
+  --line-soft: #f1f1ef;
+  --accent: #16a34a;
+  --accent-soft: #dcfce7;
+  --accent-deep: #14532d;
+  --error: #dc2626;
+  --code-bg: #18181b;
+  --code-text: #fafafa;
+  --shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.04);
+  --shadow-md: 0 1px 3px rgba(24, 24, 27, 0.05), 0 4px 12px rgba(24, 24, 27, 0.04);
+  --shadow-lg: 0 4px 6px rgba(24, 24, 27, 0.04), 0 12px 24px rgba(24, 24, 27, 0.06);
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+/* ============================================================
+   RESET LEVE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 16px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   LAYOUT PRINCIPAL
+   ============================================================ */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.masthead-url {
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   HERO / INTRODUÇÃO
+   ============================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.hero-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+.hero-title .accent {
+  color: var(--accent);
+}
+
+.hero-lead {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 580px;
+  margin: 0;
+}
+.hero-lead strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Painel lateral com info da API */
+.hero-info {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 0;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row span {
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.info-row strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ============================================================
+   ANÁLISE DA API — seção que cobre os 10 pontos da apresentação
+   ============================================================ */
+.analysis {
+  margin-bottom: 56px;
+}
+
+.analysis-head {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.analysis-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.analysis-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Grid 3 colunas em desktop, 2 em tablet, 1 em mobile */
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) {
+  .analysis-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .analysis-grid { grid-template-columns: 1fr; }
+}
+
+.analysis-cell {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s;
+}
+.analysis-cell:hover {
+  border-color: #d4d4d8;
+}
+
+/* Item largo (ocupa 3 colunas) — usado para Endpoints */
+.analysis-cell-wide {
+  grid-column: 1 / -1;
+}
+
+.analysis-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.analysis-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.analysis-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.analysis-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.analysis-body em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* Código inline */
+.inline-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+/* Lista de endpoints (item 03) */
+.endpoint-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 24px;
+}
+@media (max-width: 700px) {
+  .endpoint-list { grid-template-columns: 1fr; }
+}
+.endpoint-list li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+  padding: 4px 0;
+}
+.endpoint-list code {
+  color: var(--ink);
+  font-weight: 500;
+}
+.ep-method {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-weight: 700;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-right: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   SEÇÃO JSON — exemplos de resposta (item 10)
+   ============================================================ */
+.json-section {
+  margin-top: 8px;
+}
+.json-section-head {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.json-section-head .analysis-num {
+  margin-bottom: 0;
+}
+
+.json-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 860px) {
+  .json-grid { grid-template-columns: 1fr; }
+}
+
+.json-card {
+  background: var(--code-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.json-card-head {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+.json-method {
+  background: #4ade80;
+  color: #052e0e;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+.json-path {
+  color: var(--code-text);
+}
+.json-body {
+  margin: 0;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--code-text);
+  overflow-x: auto;
+}
+
+/* Tokens de "syntax highlight" do JSON */
+.tk-key { color: #fbbf24; }    /* chaves: amber */
+.tk-str { color: #86efac; }    /* strings: verde claro */
+.tk-num { color: #93c5fd; }    /* números: azul claro */
+.tk-pun { color: #71717a; }    /* pontuação: cinza */
+
+/* ============================================================
+   CARTÕES — Estados e Municípios
+   ============================================================ */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 860px) {
+  .cards { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #d4d4d8;
+}
+
+.card-marker {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  padding: 4px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.card-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin: 0 0 24px;
+}
+
+/* ============================================================
+   CONTROLES — Botões e Selects
+   ============================================================ */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border: none;
+  background: var(--ink);
+  color: var(--card);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  text-align: left;
+}
+.btn:hover:not(:disabled) {
+  background: #27272a;
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  background: #d4d4d8;
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+
+.btn-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  transition: transform 0.2s ease;
+}
+.btn:hover:not(:disabled) .btn-arrow {
+  transform: translateX(3px);
+}
+
+.btn-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+.btn.loading .btn-spinner { display: inline-block; }
+.btn.loading .btn-arrow { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* SELECT — visual personalizado */
+.select-wrap {
+  position: relative;
+}
+select {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+select:disabled {
+  background: var(--bg);
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-soft);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+/* ============================================================
+   INDICADOR DE STATUS — Mostra contagem ou erros
+   ============================================================ */
+.status {
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 16px;
+}
+.status.success { color: var(--accent); }
+.status.error { color: var(--error); }
+.status-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   LISTA DE MUNICÍPIOS — saída da segunda requisição
+   ============================================================ */
+.results-section {
+  margin-top: 56px;
+  display: none;
+}
+.results-section.visible { display: block; }
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.results-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--ink);
+}
+.results-title #results-uf {
+  color: var(--accent);
+}
+
+.results-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+  background: var(--card);
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.results-count strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Filtro de busca dentro dos municípios */
+.results-search {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.results-search:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.results-search::placeholder { color: var(--ink-faint); }
+
+/* Grid de municípios */
+.municipality-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.municipality {
+  padding: 12px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: fadeIn 0.3s ease both;
+}
+.municipality:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.municipality.hidden { display: none; }
+.municipality-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.municipality-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+}
+.municipality-id::before { content: 'IBGE '; opacity: 0.6; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+footer {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+footer a:hover {
+  text-decoration: underline;
+}
